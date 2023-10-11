@@ -64,7 +64,7 @@ func main() {
 		Commands: []*cli.Command{
 			{
 				Name:    "add",
-				Aliases: []string{"a"},
+				Aliases: []string{"-a"},
 				Usage:   "add a task to the list",
 				Action: func(c *cli.Context) error {
 					str := c.Args().First()
@@ -85,7 +85,7 @@ func main() {
 			},
 			{
 				Name:    "all",
-				Aliases: []string{"l"},
+				Aliases: []string{"-l"},
 				Usage:   "list all tasks",
 				Action: func(c *cli.Context) error {
 					tasks, err := getAll()
@@ -104,7 +104,7 @@ func main() {
 			},
 			{
 				Name:    "done",
-				Aliases: []string{"d"},
+				Aliases: []string{"-d"},
 				Usage:   "complete a task on the list",
 				Action: func(c *cli.Context) error {
 					text := c.Args().First()
@@ -113,7 +113,7 @@ func main() {
 			},
 			{
 				Name:    "finished",
-				Aliases: []string{"f"},
+				Aliases: []string{"-f"},
 				Usage:   "list completed tasks",
 				Action: func(c *cli.Context) error {
 					tasks, err := getFinished()
@@ -131,8 +131,9 @@ func main() {
 				},
 			},
 			{
-				Name:  "rm",
-				Usage: "deletes a task on the list",
+				Name:    "remove",
+				Aliases: []string{"-r"},
+				Usage:   "deletes a task on the list",
 				Action: func(c *cli.Context) error {
 					text := c.Args().First()
 					err := deleteTask(text)
