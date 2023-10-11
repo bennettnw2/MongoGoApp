@@ -163,7 +163,7 @@ func printTasks(tasks []*Task) {
 		if v.Completed {
 			color.Green("%d: %s\n", i+1, v.Text)
 		} else {
-			color.Yellow("%d: %s\n", i+1, v.Text)
+			color.Blue("%d: %s\n", i+1, v.Text)
 		}
 	}
 }
