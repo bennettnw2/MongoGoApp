@@ -28,8 +28,12 @@ type Task struct {
 }
 
 func init() {
-	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
-	//	clientOptions := options.Client().ApplyURI("mongodb+srv://bennettnw2:<password>@cluster00.9pzjlbi.mongodb.net/?retryWrites=true&w=majority")
+	mongoURI := os.Getenv("MONGO_URI")
+	if mongoURI == "" {
+		log.Fatal("'MONGO_URI' environment variable is not set")
+	}
+
+	clientOptions := options.Client().ApplyURI(mongoURI)
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
 		log.Fatal(err)
@@ -51,7 +55,7 @@ func main() {
 			tasks, err := getPending()
 			if err != nil {
 				if err == mongo.ErrNoDocuments {
-					fmt.Print("Nothing to see here.\nRun `add 'task'` to add a task")
+					fmt.Print("Nothing to see here.\nRun `add 'task'` to add a task\n")
 					return nil
 				}
 
@@ -64,7 +68,7 @@ func main() {
 		Commands: []*cli.Command{
 			{
 				Name:    "add",
-				Aliases: []string{"-a"},
+				Aliases: []string{"a"},
 				Usage:   "add a task to the list",
 				Action: func(c *cli.Context) error {
 					str := c.Args().First()
@@ -85,13 +89,13 @@ func main() {
 			},
 			{
 				Name:    "all",
-				Aliases: []string{"-l"},
+				Aliases: []string{"l"},
 				Usage:   "list all tasks",
 				Action: func(c *cli.Context) error {
 					tasks, err := getAll()
 					if err != nil {
 						if err == mongo.ErrNoDocuments {
-							fmt.Print("Nothing to see here.\nRun `add 'task'` to add a task")
+							fmt.Print("Nothing to see here.\nRun `add 'task'` to add a task\n")
 							return nil
 						}
 
@@ -104,7 +108,7 @@ func main() {
 			},
 			{
 				Name:    "done",
-				Aliases: []string{"-d"},
+				Aliases: []string{"d"},
 				Usage:   "complete a task on the list",
 				Action: func(c *cli.Context) error {
 					text := c.Args().First()
@@ -113,7 +117,7 @@ func main() {
 			},
 			{
 				Name:    "finished",
-				Aliases: []string{"-f"},
+				Aliases: []string{"f"},
 				Usage:   "list completed tasks",
 				Action: func(c *cli.Context) error {
 					tasks, err := getFinished()
@@ -132,7 +136,7 @@ func main() {
 			},
 			{
 				Name:    "remove",
-				Aliases: []string{"-r"},
+				Aliases: []string{"r"},
 				Usage:   "deletes a task on the list",
 				Action: func(c *cli.Context) error {
 					text := c.Args().First()
