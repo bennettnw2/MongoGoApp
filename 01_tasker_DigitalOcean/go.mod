@@ -1,6 +1,6 @@
 module github.com/bennettnw2/tasker
 
-go 1.17
+go 1.21
 
 require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
