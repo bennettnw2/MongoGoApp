@@ -29,6 +29,7 @@ type Task struct {
 
 func init() {
 	mongoURI := os.Getenv("MONGO_URI")
+	// mongoURI := "mongodb://localhost:27017/" // for local testing
 	if mongoURI == "" {
 		log.Fatal("'MONGO_URI' environment variable is not set")
 	}
