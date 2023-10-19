@@ -1,0 +1,2 @@
+This is a REST application using echo and mongoDB, written in golang
+https://dev.to/hackmamba/build-a-rest-api-with-golang-and-mongodb-echo-version-2gdg
