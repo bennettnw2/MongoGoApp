@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+
 import {Button, Card, Row, Col} from 'react-bootstrap'
+
 const Order = ({orderData, setChangeWaiter, deleteSingleOrder, setChangeOrder}) => {
+
     return (
 			<Card>
 					<Row>
