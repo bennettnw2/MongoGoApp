@@ -1,13 +1,12 @@
 FROM golang:1.21
 
-WORKDIR /app
-
-COPY server/ ./
 WORKDIR /app/server
+
+COPY server ./ 
 RUN go mod download
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /orders
+RUN CGO_ENABLED=0 GOOS=linux go build
 
 EXPOSE 8080
 
-CMD orders
+CMD ./server
